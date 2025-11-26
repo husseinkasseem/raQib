@@ -4,6 +4,7 @@ import 'package:raqib/UI/Onboarding%20Screen/widgets/onboarding%20widget.dart';
 import 'package:raqib/UI/login%20screen/screen/login_screen.dart';
 import 'package:raqib/core/assets%20manager.dart';
 import 'package:raqib/core/colors%20manager.dart';
+import 'package:raqib/core/prefs_helper.dart';
 import 'package:raqib/core/reusable%20widgets/Custom%20button.dart';
 import 'package:raqib/core/strings%20manager.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -118,6 +119,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 text: "Get started",
                 onPressed: (){
                   Navigator.pushReplacementNamed(context,LoginScreen.routeName);
+                  PrefsHelper.setScreen(true) ;
                 }
             )
                 :CustomButton(

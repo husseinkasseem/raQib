@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:raqib/UI/register_screen/screen/Register_Screen.dart';
 import 'package:raqib/core/assets%20manager.dart';
 import 'package:raqib/core/colors%20manager.dart';
 import 'package:raqib/core/reusable%20widgets/Custom%20button.dart';
@@ -40,11 +41,13 @@ class LoginScreen extends StatelessWidget {
           ),
           SizedBox(height: 24.h,),
           CustomTextField(
+            keyboardType: TextInputType.emailAddress,
             hint: "Email",
           ),
           SizedBox(height: 16.h,),
           CustomTextField(
               hint: "Password",
+            keyboardType: TextInputType.text,
             ),
           SizedBox(height: 22.h,),
           Align(
@@ -166,7 +169,7 @@ class LoginScreen extends StatelessWidget {
               ),
 
               TextButton(onPressed: (){
-
+              Navigator.of(context).pushNamed(RegisterScreen.routeName);
               },
                   child: Text("Create one",
                     style: TextStyle(
@@ -179,7 +182,7 @@ class LoginScreen extends StatelessWidget {
                   )
               )
             ],
-          )  
+          ),
           ],
           ),
         ),

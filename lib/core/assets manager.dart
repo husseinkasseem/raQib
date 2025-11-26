@@ -7,4 +7,6 @@ static const String onboardingCard1 = "assets/images/onboardingCard[1].png" ;
 static const String onboardingCard2 = "assets/images/onboarding_2.png" ;
 static const String onboardingCard3 = "assets/images/onboarding_3.png" ;
 static const String onboardingCard4 = "assets/images/onboarding_4.png" ;
+static const String numPadIcon = "assets/images/numPad.svg" ;
+static const String emailIcon = "assets/images/emailIcon.svg" ;
 }
