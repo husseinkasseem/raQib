@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:raqib/UI/Onboarding%20Screen/screen/onboarding_screen.dart';
 import 'package:raqib/UI/login%20screen/screen/login_screen.dart';
 import 'package:raqib/core/app%20style.dart';
 
@@ -24,8 +25,9 @@ class MyApp extends StatelessWidget {
             theme: AppStyle.lightTheme,
             routes: {
               LoginScreen.routeName: (_) => LoginScreen(),
+              OnboardingScreen.routeName: (_) => OnboardingScreen(),
             },
-            initialRoute: LoginScreen.routeName,
+            initialRoute: OnboardingScreen.routeName,
             debugShowCheckedModeBanner: false,
           );
         }
