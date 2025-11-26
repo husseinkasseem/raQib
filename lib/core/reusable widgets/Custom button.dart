@@ -13,9 +13,11 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: 360.w,
+      height: 48.h,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+
           backgroundColor: ColorsManager.primary,
         ),
           onPressed: onPressed,
