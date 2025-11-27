@@ -62,7 +62,7 @@ class LoginScreen extends StatelessWidget {
 
                 },
                 child: Text(
-                    "Forgot password",
+                    StringsManager.forgot,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
@@ -75,7 +75,7 @@ class LoginScreen extends StatelessWidget {
           ),
           SizedBox(height: 22.h,),
           CustomButton(
-              text: "Login",
+              text: StringsManager.login,
               onPressed: (){
 
               }
@@ -86,12 +86,13 @@ class LoginScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: Divider(
+                  color: ColorsManager.primary,
                   thickness: 1,
                 ),
               ),
               Padding(
                 padding: REdgeInsets.symmetric(horizontal: 58),
-                child: Text("Or",style: TextStyle(
+                child: Text(StringsManager.or,style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   color: ColorsManager.primary
@@ -126,7 +127,8 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       SvgPicture.asset(AssetsManager.googleIcon),
                       SizedBox(width: 38.w,),
-                      Text("Login with google",
+                      Text(
+                        StringsManager.loginWithGoogle,
                       style: TextStyle(
                         color: ColorsManager.primary,
                         fontWeight: FontWeight.w500,
@@ -156,7 +158,8 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       SvgPicture.asset(AssetsManager.appleIcon),
                       SizedBox(width: 38.w,),
-                      Text("Login with apple",
+                      Text(
+                        StringsManager.loginWithApple,
                       style: TextStyle(
                         color: ColorsManager.primary,
                         fontWeight: FontWeight.w500,
@@ -169,14 +172,16 @@ class LoginScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Don’t have an account create one",
+              Text(
+                StringsManager.dontHaveAcc,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
 
               TextButton(onPressed: (){
               Navigator.of(context).pushNamed(RegisterScreen.routeName);
               },
-                  child: Text("Create one",
+                  child: Text(
+                    StringsManager.createOne,
                     style: TextStyle(
                       decoration:TextDecoration.underline,
                         decorationColor: ColorsManager.primary,

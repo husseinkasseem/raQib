@@ -23,4 +23,10 @@ static const String next = "Next" ;
 static const String skip = "Skip" ;
 static const String raQib = "raQib" ;
 static const String getStarted = "Get started" ;
+static const String forgot = "Forgot password" ;
+static const String or = "Or" ;
+static const String loginWithGoogle = "Login with google" ;
+static const String loginWithApple = "Login with apple" ;
+static const String dontHaveAcc = "Don’t have an account create one" ;
+static const String createOne = "Create one" ;
 }
