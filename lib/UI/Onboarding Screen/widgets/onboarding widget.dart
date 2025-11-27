@@ -39,12 +39,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
             children: [
               Text(
                   widget.title,
-                style: TextStyle(
-                  fontFamily: "cairo",
-                  fontWeight: FontWeight.w500,
-                  fontSize: 30.sp,
-                  color: ColorsManager.textPrimary
-                ),
+                style: Theme.of(context).textTheme.titleLarge,
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 softWrap: true,
@@ -64,12 +59,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
           SizedBox(height: 8.h,),
           Text(
             widget.subtitle,
-            style: TextStyle(
-                fontFamily: "cairo",
-                fontWeight: FontWeight.w500,
-                fontSize: 16.sp,
-                color: ColorsManager.textSecondary
-            ),
+            style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
             softWrap: true,
           ),

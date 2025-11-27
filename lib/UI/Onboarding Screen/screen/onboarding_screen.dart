@@ -20,52 +20,56 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   PageController pageController = PageController() ;
   int pageIndex = 0 ;
-  List<Widget> pagesList = [
-    OnboardingWidget(
-      title: StringsManager.titleOnboarding0,
-      subtitle: StringsManager.subtitleOnboarding0,
-      imageInPage: AssetsManager.onboardingCard0,
-      is0page: true,
-    ),
-    OnboardingWidget(
-      title: StringsManager.titleOnboarding1,
-      subtitle: StringsManager.subtitleOnboarding1,
-      imageInPage: AssetsManager.onboardingCard1,
-    ),
-    OnboardingWidget(
-      title: StringsManager.titleOnboarding2,
-      subtitle: StringsManager.subtitleOnboarding2,
-      imageInPage: AssetsManager.onboardingCard2,
-    ),
-    OnboardingWidget(
-      title: StringsManager.titleOnboarding3,
-      subtitle: StringsManager.subtitleOnboarding3,
-      imageInPage: AssetsManager.onboardingCard3,
-    ),
-    OnboardingWidget(
-      title: StringsManager.titleOnboarding4,
-      subtitle: StringsManager.subtitleOnboarding4,
-      imageInPage: AssetsManager.onboardingCard4,
-    ),
-
-  ] ;
   @override
   Widget build(BuildContext context) {
+    List<Widget> pagesList = [
+      OnboardingWidget(
+        title: StringsManager.titleOnboarding0,
+        subtitle: StringsManager.subtitleOnboarding0,
+        imageInPage: AssetsManager.onboardingCard0,
+        is0page: true,
+      ),
+      OnboardingWidget(
+        title: StringsManager.titleOnboarding1,
+        subtitle: StringsManager.subtitleOnboarding1,
+        imageInPage: AssetsManager.onboardingCard1,
+      ),
+      OnboardingWidget(
+        title: StringsManager.titleOnboarding2,
+        subtitle: StringsManager.subtitleOnboarding2,
+        imageInPage: AssetsManager.onboardingCard2,
+      ),
+      OnboardingWidget(
+        title: StringsManager.titleOnboarding3,
+        subtitle: StringsManager.subtitleOnboarding3,
+        imageInPage: AssetsManager.onboardingCard3,
+      ),
+      OnboardingWidget(
+        title: StringsManager.titleOnboarding4,
+        subtitle: StringsManager.subtitleOnboarding4,
+        imageInPage: Theme.of(context).brightness == Brightness.light
+            ?AssetsManager.onboardingCard4light
+            :AssetsManager.onboardingCard4dark,
+      ),
+
+    ] ;
     return Scaffold(
-      backgroundColor: ColorsManager.backgroundApp,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(StringsManager.raQib,
           style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 24.sp,
-              color: ColorsManager.textPrimary
+              color: ColorsManager.textPrimaryLight
           ),
         ),
        actions: [
          TextButton(
              onPressed: (){
-
+              Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+              PrefsHelper.setScreen(true) ;
              },
              child: Padding(
                padding:  REdgeInsets.only(
@@ -87,9 +91,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
 
       body: Padding(
-        padding:  REdgeInsets.only(top: 24),
+        padding:  REdgeInsets.all(25),
         child: Column(
-
           children: [
             Expanded(
               child: PageView(

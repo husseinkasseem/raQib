@@ -94,7 +94,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                              iconSwitch==true
                                   ?AssetsManager.emailIcon
                                   :AssetsManager.numPadIcon,
-                              colorFilter: ColorFilter.mode(ColorsManager.backgroundApp,
+                              colorFilter: ColorFilter.mode(
+                                  ColorsManager.backgroundAppLight,
                                   BlendMode.srcIn
                               ),
                             ),
@@ -142,7 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         SvgPicture.asset(AssetsManager.googleIcon),
                         SizedBox(width: 38.w,),
                         Text(
-                          "Sign up with Google",
+                          StringsManager.signGoogle,
                           style: TextStyle(
                             color: ColorsManager.primary,
                             fontWeight: FontWeight.w500,
@@ -169,10 +170,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(AssetsManager.appleIcon),
+                        Theme.of(context).brightness == Brightness.light
+                            ?SvgPicture.asset(
+                            AssetsManager.appleIcon
+                        )
+                            :SvgPicture.asset(
+                          AssetsManager.appleIcon,
+                          colorFilter: ColorFilter.mode(
+                              ColorsManager.primary, BlendMode.srcIn
+                          ),
+                        ),
                         SizedBox(width: 38.w,),
                         Text(
-                          "Sign up with Apple",
+                          StringsManager.signApple,
                           style: TextStyle(
                             color: ColorsManager.primary,
                             fontWeight: FontWeight.w500,
@@ -189,25 +199,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already have an account?",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodyLarge,
+                        StringsManager.haveAccount,
+                        style:Theme.of(context).textTheme.bodyLarge,
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pushNamed(LoginScreen.routeName);
                         },
                         child: Text(
-                          "Login",
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            decorationColor: ColorsManager.primary,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: ColorsManager.primary,
-                          ),
+                          StringsManager.login,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
                     ],
