@@ -17,6 +17,11 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   bool iconSwitch = false ;
   @override
   Widget build(BuildContext context) {
@@ -48,6 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 24.h,),
                   CustomTextField(
+                    controller: nameController,
                     keyboardType: TextInputType.name,
                     hint: StringsManager.name,
                   ),
@@ -57,10 +63,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Expanded(
                         child: iconSwitch==true
                           ?CustomTextField(
+                          controller: phoneNumberController,
                             hint: StringsManager.phoneNumber,
                             keyboardType: TextInputType.phone
                         )
                           :CustomTextField(
+                          controller: emailController,
                            keyboardType: TextInputType.emailAddress,
                           hint: StringsManager.email,
                         ),
@@ -97,12 +105,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 16.h,),
                   CustomTextField(
+                    isObscureText: true,
+                    controller: passwordController,
                     keyboardType: TextInputType.text,
                     hint: StringsManager.password,
                   ),
                   SizedBox(height: 16.h,),
                   CustomTextField(
+                    controller: confirmPasswordController,
                     keyboardType: TextInputType.text,
+                    isObscureText: true,
                     hint: StringsManager.confirmPassword,
                   ),
                   SizedBox(height: 24.h,),

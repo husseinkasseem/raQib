@@ -9,8 +9,10 @@ import 'package:raqib/core/reusable%20widgets/CustomTextField.dart';
 import 'package:raqib/core/strings%20manager.dart';
 
 class LoginScreen extends StatelessWidget {
+  TextEditingController emailOrPhoneController = TextEditingController() ;
+  TextEditingController passwordController = TextEditingController() ;
   static const String routeName = "login screen" ;
-  const LoginScreen({super.key});
+   LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +43,15 @@ class LoginScreen extends StatelessWidget {
           ),
           SizedBox(height: 24.h,),
           CustomTextField(
+            controller: emailOrPhoneController,
             keyboardType: TextInputType.emailAddress,
-            hint: "Email",
+            hint: StringsManager.emailOrPassword,
           ),
           SizedBox(height: 16.h,),
           CustomTextField(
-              hint: "Password",
+            isObscureText: true,
+            controller: passwordController,
+              hint: StringsManager.password,
             keyboardType: TextInputType.text,
             ),
           SizedBox(height: 22.h,),

@@ -18,4 +18,9 @@ static const String email = "Email" ;
 static const String password = "Password" ;
 static const String confirmPassword = "Confirm password" ;
 static const String phoneNumber = "Phone number" ;
+static const String emailOrPassword = "Email or phone" ;
+static const String next = "Next" ;
+static const String skip = "Skip" ;
+static const String raQib = "raQib" ;
+static const String getStarted = "Get started" ;
 }

@@ -52,9 +52,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsManager.backgroundApp,
       appBar: AppBar(
         centerTitle: true,
-        title: Text("raQib",
+        title: Text(StringsManager.raQib,
           style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 24.sp,
@@ -71,7 +72,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                  right: 24
                ),
                child: Text(
-                 "Skip",
+                 StringsManager.skip,
                  style: TextStyle(
 
                      color: ColorsManager.primary,
@@ -116,14 +117,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             SizedBox(height: 72.h),
             pageIndex==pagesList.length-1
                 ?CustomButton(
-                text: "Get started",
+                text: StringsManager.getStarted,
                 onPressed: (){
                   Navigator.pushReplacementNamed(context,LoginScreen.routeName);
                   PrefsHelper.setScreen(true) ;
                 }
             )
                 :CustomButton(
-                text: "Next",
+                text: StringsManager.next,
                 onPressed: (){
                     if (pageIndex < pagesList.length - 1) {
                       pageIndex += 1;
