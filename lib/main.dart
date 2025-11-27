@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raqib/UI/Onboarding%20Screen/screen/onboarding_screen.dart';
+import 'package:raqib/UI/forgot%20password%20screen/screen/forgot_password_screen.dart';
 import 'package:raqib/UI/login%20screen/screen/login_screen.dart';
 import 'package:raqib/UI/register_screen/screen/Register_Screen.dart';
 import 'package:raqib/core/app%20style.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
               LoginScreen.routeName: (_) => LoginScreen(),
               OnboardingScreen.routeName: (_) => OnboardingScreen(),
               RegisterScreen.routeName:(_) => RegisterScreen(),
+              ForgotPasswordScreen.routeName:(_) => ForgotPasswordScreen(),
             },
             initialRoute: PrefsHelper.getScreen()
                 ?LoginScreen.routeName
