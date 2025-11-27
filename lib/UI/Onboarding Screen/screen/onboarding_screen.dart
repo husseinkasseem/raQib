@@ -54,6 +54,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       backgroundColor: ColorsManager.backgroundApp,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(StringsManager.raQib,
           style: TextStyle(
@@ -65,7 +66,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
        actions: [
          TextButton(
              onPressed: (){
-
+              Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+              PrefsHelper.setScreen(true) ;
              },
              child: Padding(
                padding:  REdgeInsets.only(

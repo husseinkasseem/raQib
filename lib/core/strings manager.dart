@@ -29,4 +29,7 @@ static const String loginWithGoogle = "Login with google" ;
 static const String loginWithApple = "Login with apple" ;
 static const String dontHaveAcc = "Don’t have an account create one" ;
 static const String createOne = "Create one" ;
+static const String forgotPassword = "Forgot password" ;
+static const String forgotPasswordSubtitle = "Enter your email or phone number to reset your password" ;
+static const String resetPassword = "Reset password" ;
 }

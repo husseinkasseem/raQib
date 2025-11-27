@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:raqib/UI/forgot%20password%20screen/screen/forgot_password_screen.dart';
 import 'package:raqib/UI/register_screen/screen/Register_Screen.dart';
 import 'package:raqib/core/assets%20manager.dart';
 import 'package:raqib/core/colors%20manager.dart';
@@ -59,7 +60,7 @@ class LoginScreen extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: TextButton(
                 onPressed: (){
-
+                Navigator.of(context).pushNamed(ForgotPasswordScreen.routeName);
                 },
                 child: Text(
                     StringsManager.forgot,
