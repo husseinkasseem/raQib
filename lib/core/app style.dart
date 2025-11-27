@@ -4,6 +4,7 @@ import 'package:raqib/core/colors%20manager.dart';
 
 class AppStyle {
   static ThemeData lightTheme = ThemeData(
+    scaffoldBackgroundColor: ColorsManager.backgroundApp,
     fontFamily: 'cairo',
   textTheme: TextTheme(
     titleLarge: TextStyle(

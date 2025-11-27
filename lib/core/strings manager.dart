@@ -11,4 +11,11 @@ static const String subtitleOnboarding1 = "Stay connected to your vehicle with r
 static const String subtitleOnboarding2 = "Get instant alerts and keep track of all maintenance needs effortlessly" ;
 static const String subtitleOnboarding3 = "Track driving habits to improve safety and reduce fuel and maintenance costs" ;
 static const String subtitleOnboarding4 = "Instant alerts for maintenance issues, unusual activity, and important fleet updates." ;
+static const String createAccount = "Create account" ;
+static const String subtitleCreateAccount = "Let’s create your new account" ;
+static const String name = "Name" ;
+static const String email = "Email" ;
+static const String password = "Password" ;
+static const String confirmPassword = "Confirm password" ;
+static const String phoneNumber = "Phone number" ;
 }
