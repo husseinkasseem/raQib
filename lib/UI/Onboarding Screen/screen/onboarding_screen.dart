@@ -51,7 +51,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ?AssetsManager.onboardingCard4light
             :AssetsManager.onboardingCard4dark,
       ),
-
     ] ;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,

@@ -10,7 +10,6 @@ class CustomTextField extends StatefulWidget {
  String hint ;
  TextEditingController controller = TextEditingController() ;
  TextInputType keyboardType ;
- bool iconSwitch = true ;
  bool isObscureText ;
  CustomTextField({
     required this.hint,
@@ -24,14 +23,32 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
+  bool isObscure = true;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isObscure = widget.isObscureText ;
+  }
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: widget.isObscureText,
+      obscureText: isObscure,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
-      style: TextStyle(),
       decoration: InputDecoration(
+        suffixIcon: widget.isObscureText
+            ?IconButton(
+         icon: Icon(isObscure
+          ?Icons.visibility
+          :Icons.visibility_off),
+         onPressed: (){
+         isObscure=!isObscure;
+          setState(() {
+
+          });
+         },
+        ):null,
         contentPadding: REdgeInsets.symmetric(
           vertical: 12,
           horizontal: 16,
@@ -41,9 +58,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16.r),
         borderSide: BorderSide(
-          color: ColorsManager.primary
-        )
+          color: ColorsManager.textSecondaryDark
+        ),
       ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16.r),
+          borderSide: BorderSide(
+              color: ColorsManager.primary
+          ),
+        ),
+      ),
+      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+          color: ColorsManager.textPrimaryDark
       ),
     );
   }

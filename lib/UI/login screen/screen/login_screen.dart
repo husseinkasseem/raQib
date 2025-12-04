@@ -191,6 +191,7 @@ class LoginScreen extends StatelessWidget {
                 )
               ],
             ),
+              SizedBox(height: 24.h,),
             ],
             ),
           ),
