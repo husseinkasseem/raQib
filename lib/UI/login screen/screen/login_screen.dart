@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:raqib/UI/Connectoin%20process/screens/Scanning.dart';
 import 'package:raqib/UI/forgot%20password%20screen/screen/forgot_password_screen.dart';
 import 'package:raqib/UI/register_screen/screen/Register_Screen.dart';
 import 'package:raqib/core/assets%20manager.dart';
@@ -64,7 +65,10 @@ class LoginScreen extends StatelessWidget {
                   },
                   child: Text(
                       StringsManager.forgot,
-                    style: Theme.of(context).textTheme.bodyMedium
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      decoration: TextDecoration.underline,
+                      decorationColor: ColorsManager.primary,
+                    )
                   )
               ),
             ),
@@ -72,7 +76,7 @@ class LoginScreen extends StatelessWidget {
             CustomButton(
                 text: StringsManager.login,
                 onPressed: (){
-            
+                Navigator.of(context).pushNamed(Scanning.routeName);
                 }
             ),
             SizedBox(height: 16.h,),
@@ -81,21 +85,30 @@ class LoginScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: Divider(
-                    color: ColorsManager.primary,
+                    color:Theme.of(context).brightness == Brightness.dark
+                        ?ColorsManager.textSecondaryDark
+                        :ColorsManager.primary,
                     thickness: 1,
                   ),
                 ),
                 Padding(
                   padding: REdgeInsets.symmetric(horizontal: 58),
-                  child: Text(StringsManager.or,style: TextStyle(
+                  child: Text(
+                    StringsManager.or,
+                    style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
-                    color: ColorsManager.primary
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ?ColorsManager.textSecondaryDark
+                        :ColorsManager.primary,
                   ),),
                 ),
                 Expanded(
                     child: Divider(
-                      color: ColorsManager.primary,
+                      color:
+                      Theme.of(context).brightness == Brightness.dark
+                          ?ColorsManager.textSecondaryDark
+                          :ColorsManager.primary,
                       thickness: 1,
                     )),
             
@@ -173,23 +186,31 @@ class LoginScreen extends StatelessWidget {
                       ]
                   )),
             SizedBox(height: 24.h,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  StringsManager.dontHaveAcc,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-            
-                TextButton(onPressed: (){
-                Navigator.of(context).pushNamed(RegisterScreen.routeName);
-                },
-                    child: Text(
-                      StringsManager.createOne,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    )
-                )
-              ],
+            Align(
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    StringsManager.dontHaveAcc,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  Expanded(
+                    child: TextButton(
+                        onPressed: (){
+                    Navigator.of(context).pushNamed(RegisterScreen.routeName);
+                    },
+                        child: Text(
+                          StringsManager.createOne,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            decoration: TextDecoration.underline,
+                            decorationColor: ColorsManager.primary,
+                          ),
+                        )
+                    ),
+                  )
+                ],
+              ),
             ),
               SizedBox(height: 24.h,),
             ],

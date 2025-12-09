@@ -121,7 +121,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(height: 24.h,),
                   CustomButton(
                     text: StringsManager.createAccount,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
                   SizedBox(height: 24.h,),
                   ElevatedButton(
@@ -208,7 +210,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                         child: Text(
                           StringsManager.login,
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            decoration: TextDecoration.underline,
+                            decorationColor: ColorsManager.primary,
+                          ),
                         ),
                       ),
                     ],

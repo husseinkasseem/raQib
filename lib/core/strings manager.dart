@@ -35,4 +35,11 @@ static const String resetPassword = "Reset password" ;
 static const String signApple = "Sign up with Apple" ;
 static const String signGoogle = "Sign up with Google" ;
 static const String haveAccount = "Already have an account?" ;
+static const String scanning = "Scanning for Bluetooth Devices" ;
+static const String selectOBD = "Select OBD Device" ;
+static const String pairing = "Pairing" ;
+static const String connected = "Connected" ;
+static const String cancel = "Cancel" ;
+static const String nowReady = " is now ready" ;
+static const String startTrip = "Start Trip" ;
 }

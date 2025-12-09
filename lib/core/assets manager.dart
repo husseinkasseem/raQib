@@ -10,4 +10,7 @@ static const String onboardingCard4light = "assets/images/onboarding4light.png" 
 static const String onboardingCard4dark = "assets/images/onboarding4dark.png" ;
 static const String numPadIcon = "assets/images/numPad.svg" ;
 static const String emailIcon = "assets/images/emailIcon.svg" ;
+static const String connected = "assets/images/connected_card.png" ;
+static const String pairing = "assets/images/pairing.png" ;
+static const String scanning = "assets/images/scanning_card.png" ;
 }
