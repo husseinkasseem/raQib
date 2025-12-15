@@ -1,16 +1,17 @@
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefsHelper {
-  static late SharedPreferences prefs ;
-  static init()async{
-     prefs = await SharedPreferences.getInstance() ;
+  static SharedPreferences? prefs;
 
+  static Future<void> init() async {
+    prefs = await SharedPreferences.getInstance();
   }
-  static setScreen(bool value){
-    prefs.setBool("Onboarding", value) ;
+
+  static Future<void> setScreen(bool value) async {
+    await prefs?.setBool("Onboarding", value);
   }
-  static bool getScreen(){
-    return  prefs.getBool("Onboarding")??false;
+
+  static bool getScreen() {
+    return prefs?.getBool("Onboarding") ?? false;
   }
 }

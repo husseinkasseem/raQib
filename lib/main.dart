@@ -10,10 +10,16 @@ import 'package:raqib/UI/login%20screen/screen/login_screen.dart';
 import 'package:raqib/UI/register_screen/screen/Register_Screen.dart';
 import 'package:raqib/core/app%20style.dart';
 import 'package:raqib/core/prefs_helper.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async{
-  WidgetsFlutterBinding.ensureInitialized() ;
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await PrefsHelper.init() ;
+  WidgetsFlutterBinding.ensureInitialized() ;
   runApp(const MyApp());
 
 }
@@ -31,8 +37,8 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MaterialApp(
             title: 'Flutter Demo',
-            theme: AppStyle.lightTheme,
-            themeMode: ThemeMode.light,
+            theme: AppStyle.darkTheme,
+            themeMode: ThemeMode.dark,
             routes: {
               LoginScreen.routeName: (_) => LoginScreen(),
               OnboardingScreen.routeName: (_) => OnboardingScreen(),

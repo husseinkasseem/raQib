@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "700885960312",
+    "project_id": "my-project-9aad2",
+    "storage_bucket": "my-project-9aad2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700885960312:android:4655f8adbba9b591914f8d",
+        "android_client_info": {
+          "package_name": "com.example.raqib"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNvJOBsJOZ3WSrcvcWUMmAwVZIeM0-iGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,15 +7,29 @@ import 'package:raqib/UI/forgot%20password%20screen/screen/forgot_password_scree
 import 'package:raqib/UI/register_screen/screen/Register_Screen.dart';
 import 'package:raqib/core/assets%20manager.dart';
 import 'package:raqib/core/colors%20manager.dart';
+import 'package:raqib/core/firebase%20handler.dart';
 import 'package:raqib/core/reusable%20widgets/Custom%20button.dart';
 import 'package:raqib/core/reusable%20widgets/CustomTextField.dart';
 import 'package:raqib/core/strings%20manager.dart';
 
-class LoginScreen extends StatelessWidget {
-  TextEditingController emailOrPhoneController = TextEditingController() ;
-  TextEditingController passwordController = TextEditingController() ;
+class LoginScreen extends StatefulWidget {
   static const String routeName = "login screen" ;
    LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final FirebaseHandler firebaseHandler = FirebaseHandler();
+  TextEditingController emailController = TextEditingController() ;
+  TextEditingController passwordController = TextEditingController() ;
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +60,9 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 24.h,),
             CustomTextField(
-              controller: emailOrPhoneController,
+              controller: emailController,
               keyboardType: TextInputType.emailAddress,
-              hint: StringsManager.emailOrPassword,
+              hint: StringsManager.email,
             ),
             SizedBox(height: 16.h,),
             CustomTextField(
@@ -75,8 +90,35 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: 22.h,),
             CustomButton(
                 text: StringsManager.login,
-                onPressed: (){
-                Navigator.of(context).pushNamed(Scanning.routeName);
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim(),
+                    );
+                    bool exists = await firebaseHandler
+                        .isUserExistsInFirestore();
+
+                    if (exists) {
+                      Navigator.pushReplacementNamed(
+                          context, Scanning.routeName);
+                    } else {
+                      Navigator.pushReplacementNamed(
+                        context, RegisterScreen.routeName,);
+                    }
+                  } on FirebaseAuthException catch (e) {
+                    String message = "an error occurred";
+                    if (e.code == 'user-not-found') {
+                      message = "user not found";
+                    } else if (e.code == 'wrong-password') {
+                      message = "wrong password";
+                    } else if (e.code == 'invalid-email') {
+                      message = "invalid email";
+                    }
+
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(message)));
+                  }
                 }
             ),
             SizedBox(height: 16.h,),
@@ -111,14 +153,14 @@ class LoginScreen extends StatelessWidget {
                           :ColorsManager.primary,
                       thickness: 1,
                     )),
-            
+
               ],
             ),
             SizedBox(height: 24.h,),
             ElevatedButton(
-                  onPressed: (){
-            
-                  },
+                 onPressed: (){
+
+                 },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
                     elevation: 0,
@@ -148,7 +190,7 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: 8.h,),
             ElevatedButton(
                   onPressed: (){
-            
+
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
