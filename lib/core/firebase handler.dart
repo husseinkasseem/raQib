@@ -19,4 +19,5 @@ class FirebaseHandler{
   final bytes = utf8.encode(password + "_demo_salt");
   return sha256.convert(bytes).toString();
   }
+
 }

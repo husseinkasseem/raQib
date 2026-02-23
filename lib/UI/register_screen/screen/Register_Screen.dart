@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:raqib/UI/home%20screen/screen/home_screen.dart';
 import 'package:raqib/UI/login%20screen/screen/login_screen.dart';
 import 'package:raqib/core/assets%20manager.dart';
 import 'package:raqib/core/colors%20manager.dart';
+import 'package:raqib/core/constant.dart';
 import 'package:raqib/core/reusable%20widgets/Custom%20button.dart';
 import 'package:raqib/core/reusable%20widgets/CustomTextField.dart';
 import 'package:raqib/core/strings%20manager.dart';
@@ -17,12 +20,32 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  late TextEditingController nameController;
+  late TextEditingController phoneNumberController ;
+  late TextEditingController emailController ;
+  late TextEditingController passwordController ;
+  late TextEditingController confirmPasswordController ;
   bool iconSwitch = false ;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     nameController =TextEditingController();
+     phoneNumberController =TextEditingController() ;
+     emailController =TextEditingController() ;
+     passwordController =TextEditingController() ;
+     confirmPasswordController =TextEditingController() ;
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    nameController.dispose() ;
+    phoneNumberController.dispose() ;
+    emailController.dispose() ;
+    passwordController.dispose() ;
+    confirmPasswordController.dispose() ;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +62,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 36.h,),
-                  Image.asset(AssetsManager.logo),
+                  Container(
+                      height: 120.h,
+                      width: 120.w,
+                      child: Image.asset(AssetsManager.logo)),
                   SizedBox(height: 38.h,),
                   Text(
                     StringsManager.createAccount,
@@ -53,6 +79,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 24.h,),
                   CustomTextField(
+                    validator: (value){
+                    if(value==null || value.isEmpty){
+                      return "name is empty";
+                    }
+                    },
                     controller: nameController,
                     keyboardType: TextInputType.name,
                     hint: StringsManager.name,
@@ -63,11 +94,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Expanded(
                         child: iconSwitch==true
                           ?CustomTextField(
+                            validator: (value){
+                              if(value==null || value.isEmpty){
+                                return "phone is empty";
+                              }
+                            },
                           controller: phoneNumberController,
                             hint: StringsManager.phoneNumber,
                             keyboardType: TextInputType.phone
                         )
                           :CustomTextField(
+                          validator: (value){
+                            if(value==null || value.isEmpty){
+                              return "email is empty";
+                            }
+                            if(RegExp(regexEmail).hasMatch(value)){
+                              return "email is not valid" ;
+                            }
+                          },
                           controller: emailController,
                            keyboardType: TextInputType.emailAddress,
                           hint: StringsManager.email,
@@ -106,6 +150,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 16.h,),
                   CustomTextField(
+                    validator: (value){
+
+                    },
                     isObscureText: true,
                     controller: passwordController,
                     keyboardType: TextInputType.text,
@@ -113,6 +160,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 16.h,),
                   CustomTextField(
+                    validator: (value){
+
+                    },
                     controller: confirmPasswordController,
                     keyboardType: TextInputType.text,
                     isObscureText: true,
@@ -206,7 +256,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamed(LoginScreen.routeName);
+                          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
                         },
                         child: Text(
                           StringsManager.login,
@@ -227,4 +277,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+  Future<void> registerUser(BuildContext context) async {
+    if (passwordController.text != confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("كلمة المرور غير متطابقة")),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      // نجاح التسجيل
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } on FirebaseAuthException catch (e) {
+      String message;
+
+      if (e.code == 'email-already-in-use') {
+        message = 'الإيميل مستخدم بالفعل';
+      } else if (e.code == 'weak-password') {
+        message = 'كلمة المرور ضعيفة';
+      } else if (e.code == 'invalid-email') {
+        message = 'الإيميل غير صحيح';
+      } else {
+        message = 'حدث خطأ غير متوقع';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message)),
+      );
+    }
+  }
+
 }

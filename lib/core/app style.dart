@@ -9,10 +9,16 @@ class AppStyle {
     fontFamily: 'cairo',
   textTheme: TextTheme(
     headlineLarge: TextStyle(
-      fontSize: 30,
+      fontSize: 30.sp,
       fontWeight: FontWeight.w500,
       fontFamily: "cairo",
       color: ColorsManager.textPrimaryLight
+    ),
+    headlineMedium: TextStyle(
+        fontSize: 24.sp,
+        fontWeight: FontWeight.w500,
+        fontFamily: "cairo",
+        color: ColorsManager.textPrimaryLight
     ),
     titleLarge: TextStyle(
       fontFamily: 'cairo',
@@ -41,12 +47,13 @@ class AppStyle {
     ),
   ),
     colorScheme: ColorScheme.light(
-        brightness: Brightness.light,
-        primary: ColorsManager.primary,
-        onPrimary: ColorsManager.backgroundAppLight,
-        secondary: ColorsManager.secondary,
-        onSecondary: ColorsManager.backgroundAppLight,
-        error: ColorsManager.error,
+      primary: ColorsManager.primary,
+      secondary: ColorsManager.secondary,
+      onPrimary: ColorsManager.textPrimaryLight,
+      onSecondary: ColorsManager.textSecondaryLight,
+      error: ColorsManager.success,
+      onError: ColorsManager.error,
+      tertiary: ColorsManager.backgroundAppLight
     ),
   );
 
@@ -61,14 +68,20 @@ class AppStyle {
           fontFamily: "cairo",
           color: ColorsManager.textPrimaryDark
       ),
+      headlineMedium: TextStyle(
+          fontSize: 24.sp,
+          fontWeight: FontWeight.w500,
+          fontFamily: "cairo",
+          color: ColorsManager.textPrimaryDark
+      ),
       titleLarge: TextStyle(
           fontFamily: 'cairo',
-          fontSize: 26.sp,
+          fontSize: 30.sp,
           fontWeight: FontWeight.w500,
           color: ColorsManager.textPrimaryDark
       ),
       bodyLarge: TextStyle(
-          fontSize: 14.sp,
+          fontSize: 16.sp,
           fontWeight: FontWeight.w400,
           color: ColorsManager.textSecondaryDark
       ),
@@ -87,11 +100,13 @@ class AppStyle {
     colorScheme: ColorScheme.dark(
       brightness: Brightness.dark,
       primary: ColorsManager.primary,
-      onPrimary: ColorsManager.textPrimaryDark,
       secondary: ColorsManager.secondary,
-      onSecondary: ColorsManager.textPrimaryDark,
-      error: ColorsManager.error,
-      onError: ColorsManager.backgroundAppLight,
+      onPrimary: ColorsManager.textPrimaryDark,
+      onSecondary: ColorsManager.textSecondaryDark,
+      error: ColorsManager.success,
+      onError: ColorsManager.error,
+      tertiary: ColorsManager.backgroundAppDark
+
     ),
   );
 }

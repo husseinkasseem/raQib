@@ -11,7 +11,9 @@ class CustomTextField extends StatefulWidget {
  TextEditingController controller = TextEditingController() ;
  TextInputType keyboardType ;
  bool isObscureText ;
+ String? Function(String?) validator;
  CustomTextField({
+    required this.validator,
     required this.hint,
     required this.keyboardType,
     required this.controller,
@@ -23,7 +25,7 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  bool isObscure = true;
+  bool isObscure = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -33,6 +35,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator:widget.validator ,
       obscureText: isObscure,
       controller: widget.controller,
       keyboardType: widget.keyboardType,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raqib/UI/Onboarding%20Screen/widgets/onboarding%20widget.dart';
@@ -24,32 +25,38 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     List<Widget> pagesList = [
       OnboardingWidget(
-        title: StringsManager.titleOnboarding0,
-        subtitle: StringsManager.subtitleOnboarding0,
+        title: StringsManager.titleOnboarding0.tr(),
+        subtitle: StringsManager.subtitleOnboarding0.tr(),
         imageInPage: AssetsManager.onboardingCard0,
         is0page: true,
       ),
       OnboardingWidget(
-        title: StringsManager.titleOnboarding1,
-        subtitle: StringsManager.subtitleOnboarding1,
+        title: StringsManager.titleOnboarding1.tr(),
+        subtitle: StringsManager.subtitleOnboarding1.tr(),
         imageInPage: AssetsManager.onboardingCard1,
       ),
       OnboardingWidget(
-        title: StringsManager.titleOnboarding2,
-        subtitle: StringsManager.subtitleOnboarding2,
+        title: StringsManager.titleOnboarding2.tr(),
+        subtitle: StringsManager.subtitleOnboarding2.tr(),
         imageInPage: AssetsManager.onboardingCard2,
       ),
       OnboardingWidget(
-        title: StringsManager.titleOnboarding3,
-        subtitle: StringsManager.subtitleOnboarding3,
+        title: StringsManager.titleOnboarding3.tr(),
+        subtitle: StringsManager.subtitleOnboarding3.tr(),
         imageInPage: AssetsManager.onboardingCard3,
       ),
       OnboardingWidget(
-        title: StringsManager.titleOnboarding4,
-        subtitle: StringsManager.subtitleOnboarding4,
+        title: StringsManager.titleOnboarding4.tr(),
+        subtitle: StringsManager.subtitleOnboarding4.tr(),
         imageInPage: Theme.of(context).brightness == Brightness.light
             ?AssetsManager.onboardingCard4light
             :AssetsManager.onboardingCard4dark,
+      ),
+      OnboardingWidget(
+        title: StringsManager.titleOnboarding5.tr(),
+        subtitle: "",
+        imageInPage: AssetsManager.onboardingCard5.tr(),
+        is5page: true,
       ),
     ] ;
     return Scaffold(
@@ -57,12 +64,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: Text(StringsManager.raQib,
-          style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 24.sp,
-              color: ColorsManager.textPrimaryLight
-          ),
+        title: Text(StringsManager.raQib.tr(),
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
        actions: [
          TextButton(
@@ -75,7 +78,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                  right: 24
                ),
                child: Text(
-                 StringsManager.skip,
+                 StringsManager.skip.tr(),
                  style: TextStyle(
 
                      color: ColorsManager.primary,
@@ -114,19 +117,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 activeIndex: pageIndex,
                 count: pagesList.length,
-
+              
             ),
             SizedBox(height: 72.h),
             pageIndex==pagesList.length-1
                 ?CustomButton(
-                text: StringsManager.getStarted,
+                text: StringsManager.getStarted.tr(),
                 onPressed: (){
                   Navigator.pushReplacementNamed(context,LoginScreen.routeName);
                   PrefsHelper.setScreen(true) ;
                 }
             )
                 :CustomButton(
-                text: StringsManager.next,
+                text: StringsManager.next.tr(),
                 onPressed: (){
                     if (pageIndex < pagesList.length - 1) {
                       pageIndex += 1;

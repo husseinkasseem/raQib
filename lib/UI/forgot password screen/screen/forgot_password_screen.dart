@@ -25,7 +25,10 @@ class ForgotPasswordScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 36.h,),
-              Image.asset(AssetsManager.logo),
+              Container(
+                  height: 120.h,
+                  width: 120.w,
+                  child: Image.asset(AssetsManager.logo)),
               SizedBox(height: 38.h,),
               Text(
                 StringsManager.forgotPassword,
@@ -39,6 +42,9 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
               SizedBox(height: 24.h,),
               CustomTextField(
+                  validator: (value){
+
+                  },
                   hint: StringsManager.emailOrPassword,
                   keyboardType: TextInputType.text,
                   controller: controller
