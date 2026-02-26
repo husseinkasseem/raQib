@@ -96,8 +96,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                           isDense: true,
                           value: null,
                           isExpanded: true,
-                          iconEnabledColor: ColorsManager.textSecondaryDark,
-                          iconDisabledColor: ColorsManager.textSecondaryDark,
+                          iconEnabledColor: Theme.of(context).colorScheme.onSecondary,
+                          iconDisabledColor: Theme.of(context).colorScheme.onSecondary,
                           dropdownColor: Theme.of(context).colorScheme.tertiary,
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.onPrimary,
@@ -149,8 +149,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                             StringsManager.chooseLanguage.tr()
                           ),
                           isExpanded: true,
-                          iconEnabledColor: ColorsManager.textSecondaryDark,
-                          iconDisabledColor: ColorsManager.textSecondaryDark,
+                          iconEnabledColor: Theme.of(context).colorScheme.onSecondary,
+                          iconDisabledColor: Theme.of(context).colorScheme.onSecondary,
                           dropdownColor: Theme.of(context).colorScheme.tertiary,
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.onPrimary,

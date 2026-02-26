@@ -49,5 +49,17 @@
   "english": "English",
   "arabic": "العربية",
   "choose_theme": "أختر الوضع",
-  "choose_language": "أختر اللغة"
+  "choose_language": "أختر اللغة",
+  "required_field": "هذا الحقل مطلوب",
+  "invalid_input": "إدخال غير صالح",
+  "password_empty": "كلمة المرور لا يمكن أن تكون فارغة",
+  "password_weak": "أدخل 8 أحرف على الأقل، تتضمن حرفًا كبيرًا ورقمًا واحدًا على الأقل",
+  "phone_empty": "رقم الهاتف لا يمكن أن يكون فارغًا",
+  "passwords_do_not_match": "كلمتا المرور غير متطابقتين",
+  "success": "تم بنجاح",
+  "login_route": "شاشة تسجيل الدخول",
+  "register_route": "التسجيل",
+  "loading": "تحميل...",
+  "no_user_found": "لا يوجد مستخدم لهذا البريد الالكتروني",
+  "wrong_password": "كلمة مرور خاطئة لهذا الحساب"
 }

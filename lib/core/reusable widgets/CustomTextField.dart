@@ -40,11 +40,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
+
         suffixIcon: widget.isObscureText
             ?IconButton(
          icon: Icon(isObscure
-          ?Icons.visibility
-          :Icons.visibility_off),
+          ?Icons.visibility_off
+          :Icons.visibility),
          onPressed: (){
          isObscure=!isObscure;
           setState(() {
@@ -57,13 +58,25 @@ class _CustomTextFieldState extends State<CustomTextField> {
           horizontal: 16,
         ),
       hintText: widget.hint,
-      hintStyle: Theme.of(context).textTheme.bodyLarge,
+      hintStyle: Theme.of(context).textTheme.bodySmall,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16.r),
         borderSide: BorderSide(
           color: ColorsManager.textSecondaryDark
         ),
       ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16.r),
+          borderSide: BorderSide(
+              color: ColorsManager.error
+          ),
+        ),
+        focusedErrorBorder:  OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16.r),
+          borderSide: BorderSide(
+              color: ColorsManager.primary
+          ),
+        ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.r),
           borderSide: BorderSide(
@@ -72,8 +85,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
       ),
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-          color: ColorsManager.textPrimaryDark
-      ),
+        color: Theme.of(context).colorScheme.onPrimary,
+
+      )
     );
   }
 }

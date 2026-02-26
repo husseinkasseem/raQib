@@ -49,5 +49,17 @@
   "english": "English",
   "arabic": "العربية",
   "choose_theme": "Choose Theme",
-  "choose_language": "Choose Language"
+  "choose_language": "Choose Language",
+  "required_field": "This field is required",
+  "invalid_input": "Invalid input",
+  "password_empty": "Password cannot be empty",
+  "password_weak": "Enter at least 8 characters, including one uppercase letter and one number",
+  "phone_empty": "Phone number cannot be empty",
+  "passwords_do_not_match": "Passwords do not match",
+  "success": "Success",
+  "login_route": "login_screen",
+  "register_route": "register",
+  "loading": "Loading...",
+  "no_user_found": "No user found for that email.",
+  "wrong_password": "Wrong password provided for that user."
 }

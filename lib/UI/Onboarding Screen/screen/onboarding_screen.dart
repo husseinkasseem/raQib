@@ -25,6 +25,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     List<Widget> pagesList = [
       OnboardingWidget(
+        title: StringsManager.titleOnboarding5.tr(),
+        subtitle: "",
+        imageInPage: AssetsManager.onboardingCard5.tr(),
+        is5page: true,
+      ),
+      OnboardingWidget(
         title: StringsManager.titleOnboarding0.tr(),
         subtitle: StringsManager.subtitleOnboarding0.tr(),
         imageInPage: AssetsManager.onboardingCard0,
@@ -34,11 +40,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         title: StringsManager.titleOnboarding1.tr(),
         subtitle: StringsManager.subtitleOnboarding1.tr(),
         imageInPage: AssetsManager.onboardingCard1,
-      ),
-      OnboardingWidget(
-        title: StringsManager.titleOnboarding2.tr(),
-        subtitle: StringsManager.subtitleOnboarding2.tr(),
-        imageInPage: AssetsManager.onboardingCard2,
       ),
       OnboardingWidget(
         title: StringsManager.titleOnboarding3.tr(),
@@ -52,12 +53,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ?AssetsManager.onboardingCard4light
             :AssetsManager.onboardingCard4dark,
       ),
-      OnboardingWidget(
-        title: StringsManager.titleOnboarding5.tr(),
-        subtitle: "",
-        imageInPage: AssetsManager.onboardingCard5.tr(),
-        is5page: true,
-      ),
+
     ] ;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,

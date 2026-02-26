@@ -9,10 +9,10 @@ class AppStyle {
     fontFamily: 'cairo',
   textTheme: TextTheme(
     headlineLarge: TextStyle(
-      fontSize: 30.sp,
+      fontSize: 20.sp,
       fontWeight: FontWeight.w500,
       fontFamily: "cairo",
-      color: ColorsManager.textPrimaryLight
+      color: ColorsManager.primary
     ),
     headlineMedium: TextStyle(
         fontSize: 24.sp,
@@ -20,29 +20,27 @@ class AppStyle {
         fontFamily: "cairo",
         color: ColorsManager.textPrimaryLight
     ),
-    titleLarge: TextStyle(
+    titleLarge: TextStyle(          //title in onboarding
       fontFamily: 'cairo',
-      fontSize: 26.sp,
+      fontSize: 30.sp,
       fontWeight: FontWeight.w500,
       color: ColorsManager.textPrimaryLight
     ),
-    bodyLarge: TextStyle(
-        fontFamily: "cairo",
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w500,
+    bodyLarge: TextStyle(                 //subtitle in onboarding
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w400,
         color: ColorsManager.textSecondaryLight
     ),
     bodySmall: TextStyle(
         fontFamily: "cairo",
         fontWeight: FontWeight.w500,
-        fontSize: 16.sp,
+        fontSize: 14.sp,
         color: ColorsManager.textSecondaryLight
     ),
     bodyMedium: TextStyle(
       fontSize: 14.sp,
       fontWeight: FontWeight.w400,
       color: ColorsManager.primary,
-      decoration: TextDecoration.underline,
       decorationColor: ColorsManager.primary,
     ),
   ),
@@ -51,9 +49,9 @@ class AppStyle {
       secondary: ColorsManager.secondary,
       onPrimary: ColorsManager.textPrimaryLight,
       onSecondary: ColorsManager.textSecondaryLight,
-      error: ColorsManager.success,
-      onError: ColorsManager.error,
-      tertiary: ColorsManager.backgroundAppLight
+      error: ColorsManager.error,
+      onError: ColorsManager.success,
+      tertiary: ColorsManager.backgroundAppLight,
     ),
   );
 
@@ -63,10 +61,10 @@ class AppStyle {
     fontFamily: 'cairo',
     textTheme: TextTheme(
       headlineLarge: TextStyle(
-          fontSize: 30,
+          fontSize: 20,
           fontWeight: FontWeight.w500,
           fontFamily: "cairo",
-          color: ColorsManager.textPrimaryDark
+          color: ColorsManager.primary
       ),
       headlineMedium: TextStyle(
           fontSize: 24.sp,
@@ -74,13 +72,13 @@ class AppStyle {
           fontFamily: "cairo",
           color: ColorsManager.textPrimaryDark
       ),
-      titleLarge: TextStyle(
+      titleLarge:TextStyle(                 //title in onboarding
           fontFamily: 'cairo',
           fontSize: 30.sp,
           fontWeight: FontWeight.w500,
           color: ColorsManager.textPrimaryDark
       ),
-      bodyLarge: TextStyle(
+      bodyLarge: TextStyle(           //subtitle in onboarding
           fontSize: 16.sp,
           fontWeight: FontWeight.w400,
           color: ColorsManager.textSecondaryDark
@@ -103,8 +101,8 @@ class AppStyle {
       secondary: ColorsManager.secondary,
       onPrimary: ColorsManager.textPrimaryDark,
       onSecondary: ColorsManager.textSecondaryDark,
-      error: ColorsManager.success,
-      onError: ColorsManager.error,
+      error: ColorsManager.error,
+      onError: ColorsManager.success,
       tertiary: ColorsManager.backgroundAppDark
 
     ),

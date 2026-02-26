@@ -10,19 +10,14 @@ import 'package:raqib/UI/Onboarding%20Screen/screen/onboarding_screen.dart';
 import 'package:raqib/UI/forgot%20password%20screen/screen/forgot_password_screen.dart';
 import 'package:raqib/UI/home%20screen/screen/home_screen.dart';
 import 'package:raqib/UI/login%20screen/screen/login_screen.dart';
-import 'package:raqib/UI/register_screen/screen/Register_Screen.dart';
 import 'package:raqib/core/app%20style.dart';
 import 'package:raqib/core/prefs_helper.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:raqib/core/themeProvider.dart';
-import 'firebase_options.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   await PrefsHelper.init() ;
   runApp(ChangeNotifierProvider(
     create: (context)=> ThemeProvider()..initTheme(),
@@ -32,7 +27,7 @@ void main() async{
             Locale('ar')
           ],
           path: 'assets/translations',
-          fallbackLocale: Locale('en'),
+          fallbackLocale: Locale(Intl.systemLocale),
           saveLocale: true,
           child:const MyApp())));
 }
@@ -57,7 +52,6 @@ class MyApp extends StatelessWidget {
             routes: {
               LoginScreen.routeName: (_) => LoginScreen(),
               OnboardingScreen.routeName: (_) => OnboardingScreen(),
-              RegisterScreen.routeName:(_) => RegisterScreen(),
               ForgotPasswordScreen.routeName:(_) => ForgotPasswordScreen(),
               Scanning.routeName:(_) => Scanning(),
               SelectOBD.routeName:(_) => SelectOBD(),
