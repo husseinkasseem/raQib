@@ -8,7 +8,6 @@ import 'package:raqib/UI/Connectoin%20process/screens/Select_OBD.dart';
 import 'package:raqib/UI/Connectoin%20process/screens/pairing.dart';
 import 'package:raqib/UI/Onboarding%20Screen/screen/onboarding_screen.dart';
 import 'package:raqib/UI/forgot%20password%20screen/screen/forgot_password_screen.dart';
-import 'package:raqib/UI/home%20screen/screen/home_screen.dart';
 import 'package:raqib/UI/login%20screen/screen/login_screen.dart';
 import 'package:raqib/core/app%20style.dart';
 import 'package:raqib/core/prefs_helper.dart';
@@ -57,7 +56,6 @@ class MyApp extends StatelessWidget {
               SelectOBD.routeName:(_) => SelectOBD(),
               Pairing.routeName:(_) => Pairing(),
               Connected.routeName:(_) => Connected(),
-              HomeScreen.routeName:(_) => HomeScreen(),
             },
              initialRoute: PrefsHelper.getScreen()
                  ?LoginScreen.routeName
