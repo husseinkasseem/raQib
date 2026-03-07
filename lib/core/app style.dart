@@ -9,44 +9,49 @@ class AppStyle {
     fontFamily: 'cairo',
   textTheme: TextTheme(
     headlineLarge: TextStyle(
-      fontSize: 30,
+      fontSize: 20.sp,
       fontWeight: FontWeight.w500,
       fontFamily: "cairo",
-      color: ColorsManager.textPrimaryLight
+      color: ColorsManager.primary
     ),
-    titleLarge: TextStyle(
+    headlineMedium: TextStyle(
+        fontSize: 24.sp,
+        fontWeight: FontWeight.w500,
+        fontFamily: "cairo",
+        color: ColorsManager.textPrimaryLight
+    ),
+    titleLarge: TextStyle(          //title in onboarding
       fontFamily: 'cairo',
-      fontSize: 26.sp,
+      fontSize: 30.sp,
       fontWeight: FontWeight.w500,
       color: ColorsManager.textPrimaryLight
     ),
-    bodyLarge: TextStyle(
-        fontFamily: "cairo",
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w500,
+    bodyLarge: TextStyle(                 //subtitle in onboarding
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w400,
         color: ColorsManager.textSecondaryLight
     ),
     bodySmall: TextStyle(
         fontFamily: "cairo",
         fontWeight: FontWeight.w500,
-        fontSize: 16.sp,
+        fontSize: 14.sp,
         color: ColorsManager.textSecondaryLight
     ),
     bodyMedium: TextStyle(
       fontSize: 14.sp,
       fontWeight: FontWeight.w400,
       color: ColorsManager.primary,
-      decoration: TextDecoration.underline,
       decorationColor: ColorsManager.primary,
     ),
   ),
     colorScheme: ColorScheme.light(
-        brightness: Brightness.light,
-        primary: ColorsManager.primary,
-        onPrimary: ColorsManager.backgroundAppLight,
-        secondary: ColorsManager.secondary,
-        onSecondary: ColorsManager.backgroundAppLight,
-        error: ColorsManager.error,
+      primary: ColorsManager.primary,
+      secondary: ColorsManager.secondary,
+      onPrimary: ColorsManager.textPrimaryLight,
+      onSecondary: ColorsManager.textSecondaryLight,
+      error: ColorsManager.error,
+      onError: ColorsManager.success,
+      tertiary: ColorsManager.backgroundAppLight,
     ),
   );
 
@@ -56,19 +61,25 @@ class AppStyle {
     fontFamily: 'cairo',
     textTheme: TextTheme(
       headlineLarge: TextStyle(
-          fontSize: 30,
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          fontFamily: "cairo",
+          color: ColorsManager.primary
+      ),
+      headlineMedium: TextStyle(
+          fontSize: 24.sp,
           fontWeight: FontWeight.w500,
           fontFamily: "cairo",
           color: ColorsManager.textPrimaryDark
       ),
-      titleLarge: TextStyle(
+      titleLarge:TextStyle(                 //title in onboarding
           fontFamily: 'cairo',
-          fontSize: 26.sp,
+          fontSize: 30.sp,
           fontWeight: FontWeight.w500,
           color: ColorsManager.textPrimaryDark
       ),
-      bodyLarge: TextStyle(
-          fontSize: 14.sp,
+      bodyLarge: TextStyle(           //subtitle in onboarding
+          fontSize: 16.sp,
           fontWeight: FontWeight.w400,
           color: ColorsManager.textSecondaryDark
       ),
@@ -87,11 +98,13 @@ class AppStyle {
     colorScheme: ColorScheme.dark(
       brightness: Brightness.dark,
       primary: ColorsManager.primary,
-      onPrimary: ColorsManager.textPrimaryDark,
       secondary: ColorsManager.secondary,
-      onSecondary: ColorsManager.textPrimaryDark,
+      onPrimary: ColorsManager.textPrimaryDark,
+      onSecondary: ColorsManager.textSecondaryDark,
       error: ColorsManager.error,
-      onError: ColorsManager.backgroundAppLight,
+      onError: ColorsManager.success,
+      tertiary: ColorsManager.backgroundAppDark
+
     ),
   );
 }

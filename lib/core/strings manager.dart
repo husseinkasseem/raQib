@@ -1,45 +1,60 @@
-abstract class StringsManager{
-static const String login = "Login" ;
-static const String welcomeBack = "Welcome back" ;
-static const String titleOnboarding0 = "Welcome to" ;
-static const String titleOnboarding1 = "Stay connected to your vehicle" ;
-static const String titleOnboarding2 = "Smart maintenance" ;
-static const String titleOnboarding3 = "Monitor driver behavior" ;
-static const String titleOnboarding4 = "Stay notified in real time" ;
-static const String subtitleOnboarding0 = "Easily manage your fleet anytime, anywher" ;
-static const String subtitleOnboarding1 = "Stay connected to your vehicle with real-time tracking from any where" ;
-static const String subtitleOnboarding2 = "Get instant alerts and keep track of all maintenance needs effortlessly" ;
-static const String subtitleOnboarding3 = "Track driving habits to improve safety and reduce fuel and maintenance costs" ;
-static const String subtitleOnboarding4 = "Instant alerts for maintenance issues, unusual activity, and important fleet updates." ;
-static const String createAccount = "Create account" ;
-static const String subtitleCreateAccount = "Let’s create your new account" ;
-static const String name = "Name" ;
-static const String email = "Email" ;
-static const String password = "Password" ;
-static const String confirmPassword = "Confirm password" ;
-static const String phoneNumber = "Phone number" ;
-static const String emailOrPassword = "Email or phone" ;
-static const String next = "Next" ;
-static const String skip = "Skip" ;
-static const String raQib = "raQib" ;
-static const String getStarted = "Get started" ;
-static const String forgot = "Forgot password" ;
-static const String or = "Or" ;
-static const String loginWithGoogle = "Login with google" ;
-static const String loginWithApple = "Login with apple" ;
-static const String dontHaveAcc = "Don’t have an account create one" ;
-static const String createOne = "Create one" ;
-static const String forgotPassword = "Forgot password" ;
-static const String forgotPasswordSubtitle = "Enter your email or phone number to reset your password" ;
-static const String resetPassword = "Reset password" ;
-static const String signApple = "Sign up with Apple" ;
-static const String signGoogle = "Sign up with Google" ;
-static const String haveAccount = "Already have an account?" ;
-static const String scanning = "Scanning for Bluetooth Devices" ;
-static const String selectOBD = "Select OBD Device" ;
-static const String pairing = "Pairing" ;
-static const String connected = "Connected" ;
-static const String cancel = "Cancel" ;
-static const String nowReady = " is now ready" ;
-static const String startTrip = "Start Trip" ;
+abstract class StringsManager {
+  static const String login = "login";
+  static const String welcomeBack = "welcomeBack";
+  static const String titleOnboarding0 = "titleOnboarding0";
+  static const String titleOnboarding1 = "titleOnboarding1";
+  static const String titleOnboarding3 = "titleOnboarding3";
+  static const String titleOnboarding4 = "titleOnboarding4";
+  static const String subtitleOnboarding0 = "subtitleOnboarding0";
+  static const String subtitleOnboarding1 = "subtitleOnboarding1";
+  static const String subtitleOnboarding3 = "subtitleOnboarding3";
+  static const String subtitleOnboarding4 = "subtitleOnboarding4";
+  static const String titleOnboarding5 = "titleOnboarding5";
+  static const String email = "email";
+  static const String password = "password";
+  static const String confirmPassword = "confirmPassword";
+  static const String phoneNumber = "phoneNumber";
+  static const String emailOrPassword = "emailOrPassword";
+  static const String next = "next";
+  static const String skip = "skip";
+  static const String raQib = "raQib";
+  static const String getStarted = "getStarted";
+  static const String forgot = "forgot";
+  static const String or = "or";
+
+
+
+
+  static const String forgotPassword = "forgotPassword";
+  static const String forgotPasswordSubtitle = "forgotPasswordSubtitle";
+  static const String resetPassword = "resetPassword";
+
+
+
+  static const String scanning = "scanning";
+  static const String selectOBD = "selectOBD";
+  static const String pairing = "pairing";
+  static const String connected = "connected";
+  static const String cancel = "cancel";
+  static const String nowReady = "nowReady";
+  static const String startTrip = "startTrip";
+  static const String otb = "otb";
+  static const String dark = "dark";
+  static const String light = "light";
+  static const String arabic = "arabic";
+  static const String english = "english";
+  static const String chooseTheme = "choose_theme";
+  static const String chooseLanguage = "choose_language";
+  static const String requiredField = "required_field";
+  static const String invalidInput = "invalid_input";
+  static const String passwordEmpty = "password_empty";
+  static const String passwordWeak = "password_weak";
+  static const String phoneEmpty = "phone_empty";
+  static const String passwordsDoNotMatch = "passwords_do_not_match";
+  static const String success = "success";
+  static const String loginRoute = "login_route";
+  static const String registerRoute = "register_route";
+  static const String loading = "loading";
+  static const String noUserFound = "no_user_found";
+  static const String wrongPassword = "wrong_password";
 }

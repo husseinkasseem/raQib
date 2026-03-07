@@ -11,7 +11,9 @@ class CustomTextField extends StatefulWidget {
  TextEditingController controller = TextEditingController() ;
  TextInputType keyboardType ;
  bool isObscureText ;
+ String? Function(String?) validator;
  CustomTextField({
+    required this.validator,
     required this.hint,
     required this.keyboardType,
     required this.controller,
@@ -23,7 +25,7 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  bool isObscure = true;
+  bool isObscure = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -33,15 +35,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator:widget.validator ,
       obscureText: isObscure,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
+
         suffixIcon: widget.isObscureText
             ?IconButton(
          icon: Icon(isObscure
-          ?Icons.visibility
-          :Icons.visibility_off),
+          ?Icons.visibility_off
+          :Icons.visibility),
          onPressed: (){
          isObscure=!isObscure;
           setState(() {
@@ -54,13 +58,25 @@ class _CustomTextFieldState extends State<CustomTextField> {
           horizontal: 16,
         ),
       hintText: widget.hint,
-      hintStyle: Theme.of(context).textTheme.bodyLarge,
+      hintStyle: Theme.of(context).textTheme.bodySmall,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16.r),
         borderSide: BorderSide(
           color: ColorsManager.textSecondaryDark
         ),
       ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16.r),
+          borderSide: BorderSide(
+              color: ColorsManager.error
+          ),
+        ),
+        focusedErrorBorder:  OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16.r),
+          borderSide: BorderSide(
+              color: ColorsManager.primary
+          ),
+        ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.r),
           borderSide: BorderSide(
@@ -69,8 +85,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
       ),
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-          color: ColorsManager.textPrimaryDark
-      ),
+        color: Theme.of(context).colorScheme.onPrimary,
+
+      )
     );
   }
 }
