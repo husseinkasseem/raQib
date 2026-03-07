@@ -1,29 +1,39 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:ffi';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raqib/UI/Connectoin%20process/screens/Scanning.dart';
 import 'package:raqib/UI/forgot%20password%20screen/screen/forgot_password_screen.dart';
-import 'package:raqib/UI/register_screen/screen/Register_Screen.dart';
 import 'package:raqib/core/assets%20manager.dart';
 import 'package:raqib/core/colors%20manager.dart';
-import 'package:raqib/core/firebase%20handler.dart';
+import 'package:raqib/core/constant.dart';
 import 'package:raqib/core/reusable%20widgets/Custom%20button.dart';
 import 'package:raqib/core/reusable%20widgets/CustomTextField.dart';
+import 'package:raqib/core/reusable%20widgets/customDialog.dart';
 import 'package:raqib/core/strings%20manager.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = "login screen" ;
-   LoginScreen({super.key});
+  LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final FirebaseHandler firebaseHandler = FirebaseHandler();
-  TextEditingController emailController = TextEditingController() ;
-  TextEditingController passwordController = TextEditingController() ;
+  late TextEditingController emailController;
+
+  late TextEditingController passwordController;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+  }
+
   @override
   void dispose() {
     emailController.dispose();
@@ -34,232 +44,117 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: AppBar(
-      backgroundColor: Colors.transparent,
-    ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       body: Align(
         alignment: Alignment.center,
         child: Padding(
-          padding: REdgeInsets.symmetric(
-            horizontal: 25
-          ),
+          padding: REdgeInsets.symmetric(horizontal: 25),
           child: SingleChildScrollView(
-            child: Column(
-            children: [
-            SizedBox(height: 36.h,),
-            Image.asset(AssetsManager.logo),
-            SizedBox(height: 38.h,),
-            Text(
-              StringsManager.login,
-            style: Theme.of(context).textTheme.titleLarge,
-            ),
-            SizedBox(height: 16.h,),
-            Text(
-                StringsManager.welcomeBack,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            SizedBox(height: 24.h,),
-            CustomTextField(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-              hint: StringsManager.email,
-            ),
-            SizedBox(height: 16.h,),
-            CustomTextField(
-              isObscureText: true,
-              controller: passwordController,
-                hint: StringsManager.password,
-              keyboardType: TextInputType.text,
-              ),
-            SizedBox(height: 22.h,),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                  onPressed: (){
-                  Navigator.of(context).pushNamed(ForgotPasswordScreen.routeName);
-                  },
-                  child: Text(
-                      StringsManager.forgot,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      decoration: TextDecoration.underline,
-                      decorationColor: ColorsManager.primary,
-                    )
-                  )
-              ),
-            ),
-            SizedBox(height: 22.h,),
-            CustomButton(
-                text: StringsManager.login,
-                onPressed: () async {
-                  try {
-                    await FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: emailController.text.trim(),
-                      password: passwordController.text.trim(),
-                    );
-                    bool exists = await firebaseHandler
-                        .isUserExistsInFirestore();
-
-                    if (exists) {
-                      Navigator.pushReplacementNamed(
-                          context, Scanning.routeName);
-                    } else {
-                      Navigator.pushReplacementNamed(
-                        context, RegisterScreen.routeName,);
-                    }
-                  } on FirebaseAuthException catch (e) {
-                    String message = "an error occurred";
-                    if (e.code == 'user-not-found') {
-                      message = "user not found";
-                    } else if (e.code == 'wrong-password') {
-                      message = "wrong password";
-                    } else if (e.code == 'invalid-email') {
-                      message = "invalid email";
-                    }
-
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(message)));
-                  }
-                }
-            ),
-            SizedBox(height: 16.h,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Divider(
-                    color:Theme.of(context).brightness == Brightness.dark
-                        ?ColorsManager.textSecondaryDark
-                        :ColorsManager.primary,
-                    thickness: 1,
-                  ),
-                ),
-                Padding(
-                  padding: REdgeInsets.symmetric(horizontal: 58),
-                  child: Text(
-                    StringsManager.or,
-                    style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ?ColorsManager.textSecondaryDark
-                        :ColorsManager.primary,
-                  ),),
-                ),
-                Expanded(
-                    child: Divider(
-                      color:
-                      Theme.of(context).brightness == Brightness.dark
-                          ?ColorsManager.textSecondaryDark
-                          :ColorsManager.primary,
-                      thickness: 1,
-                    )),
-
-              ],
-            ),
-            SizedBox(height: 24.h,),
-            ElevatedButton(
-                 onPressed: (){
-
-                 },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(16),
-                      side: BorderSide(
-                        color: ColorsManager.primary,
-                        width: 0.75,
-                      )
-                    )
-                  ),
-                  child: Row(
-                      mainAxisAlignment:MainAxisAlignment.center ,
-                      children: [
-                        SvgPicture.asset(AssetsManager.googleIcon),
-                        SizedBox(width: 38.w,),
-                        Text(
-                          StringsManager.loginWithGoogle,
-                        style: TextStyle(
-                          color: ColorsManager.primary,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16.sp
-                        ),
-                        )
-                      ]
-                  )),
-            SizedBox(height: 8.h,),
-            ElevatedButton(
-                  onPressed: (){
-
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(16),
-                      side: BorderSide(
-                        color: ColorsManager.primary,
-                        width: 0.75.w,
-                      )
-                    )
-                  ),
-                  child: Row(
-                      mainAxisAlignment:MainAxisAlignment.center ,
-                      children: [
-                        Theme.of(context).brightness == Brightness.light
-                        ?SvgPicture.asset(
-                            AssetsManager.appleIcon
-                        )
-                        :SvgPicture.asset(
-                            AssetsManager.appleIcon,
-                            colorFilter: ColorFilter.mode(
-                                ColorsManager.primary, BlendMode.srcIn
-                            ),
-                        ),
-                        SizedBox(width: 38.w,),
-                        Text(
-                          StringsManager.loginWithApple,
-                        style: TextStyle(
-                          color: ColorsManager.primary,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16.sp
-                        ),
-                        )
-                      ]
-                  )),
-            SizedBox(height: 24.h,),
-            Align(
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+            child: Form(
+              key: formKey,
+              child: Column(
                 children: [
+                  SizedBox(height: 36.h,),
+                  Container(
+                      height: 120.h,
+                      width: 120.w,
+                      child: Image.asset(AssetsManager.logo)),
+                  SizedBox(height: 38.h,),
                   Text(
-                    StringsManager.dontHaveAcc,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    StringsManager.login.tr(),
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .titleLarge,
                   ),
-                  Expanded(
-                    child: TextButton(
-                        onPressed: (){
-                    Navigator.of(context).pushNamed(RegisterScreen.routeName);
+                  SizedBox(height: 16.h,),
+                  Text(
+                    StringsManager.welcomeBack.tr(),
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .bodyLarge,
+                  ),
+                  SizedBox(height: 24.h,),
+                  CustomTextField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return StringsManager.requiredField.tr();
+                      }
+                      if (!RegExp(regexEmail).hasMatch(value)) {
+                        return StringsManager.invalidInput.tr();
+                      }
                     },
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    hint: StringsManager.email.tr(),
+                  ),
+                  SizedBox(height: 16.h,),
+                  CustomTextField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return StringsManager.passwordEmpty.tr();
+                      }
+                      if (value.length < 8 && !RegExp(regexPassword).hasMatch(
+                          value)) {
+                        return StringsManager.passwordWeak.tr();
+                      }
+                    },
+                    isObscureText: true,
+                    controller: passwordController,
+                    hint: StringsManager.password.tr(),
+                    keyboardType: TextInputType.text,
+                  ),
+                  SizedBox(height: 22.h,),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(
+                              ForgotPasswordScreen.routeName);
+                        },
                         child: Text(
-                          StringsManager.createOne,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            decoration: TextDecoration.underline,
-                            decorationColor: ColorsManager.primary,
-                          ),
+                            StringsManager.forgot.tr(),
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                              decoration: TextDecoration.underline,
+                              decorationColor: ColorsManager.primary,
+                            )
                         )
                     ),
-                  )
+                  ),
+                  SizedBox(height: 22.h,),
+                  CustomButton(
+                      text: StringsManager.login.tr(),
+                      onPressed: () {
+                        login();
+                      }
+                  ),
+                  SizedBox(height: 16.h,),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                    ),
+                  ),
+                  SizedBox(height: 24.h,),
                 ],
               ),
-            ),
-              SizedBox(height: 24.h,),
-            ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  login() async {
+    if (formKey.currentState!.validate()) {
+      CustomDialog.showLoadingDialog(context);
+    }
   }
 }
