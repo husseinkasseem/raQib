@@ -25,7 +25,7 @@ class _ConnectedState extends State<Connected> {
   }
 
   Future<void> _handleConnection() async {
-    String targetIp = widget.ip ?? "192.168.100.4";
+    String targetIp = widget.ip ?? "10.130.204.217";
     bool ok = await TelemetryManager().connect(targetIp);
 
     if (ok) {

@@ -25,15 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isDark = themeProvider.currentTheme == ThemeMode.dark;
-
-    // الصفحات الأربعة كاملة وبترجمة لحظية
     final List<Widget> pages = [
       const _MainHomeContent(),
       const RecordedTripsSection(),
       const TripSummarySection(),
       const ProfileSection(),
     ];
-
     return Scaffold(
       backgroundColor: isDark ? ColorsManager.backgroundAppDark : ColorsManager.backgroundAppLight,
       body: SafeArea(child: pages[_selectedIndex]),

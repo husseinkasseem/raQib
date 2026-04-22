@@ -18,8 +18,6 @@ class _HomeHeaderState extends State<HomeHeader> {
     super.initState();
     _loadUserData();
   }
-
-  // دالة لتحميل البيانات من الجهاز
   _loadUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -44,13 +42,13 @@ class _HomeHeaderState extends State<HomeHeader> {
           SizedBox(width: 12.w),
           Expanded(
             child: Text(
-              '${"welcome".tr()} ${userName ?? ""}', // عرض الاسم الحقيقي
+              '${"welcome".tr()} ${userName ?? ""}',
               style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
             ),
           ),
           IconButton(
               onPressed: () {
-                _loadUserData(); // زرار التحديث يعمل ريفرش للبيانات
+                _loadUserData();
               },
               icon: Icon(Icons.refresh, color: Colors.grey.shade400, size: 20.sp)
           ),

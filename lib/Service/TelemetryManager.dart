@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'api_service.dart';
-
 class TelemetryManager {
   static final TelemetryManager _instance = TelemetryManager._internal();
   factory TelemetryManager() => _instance;

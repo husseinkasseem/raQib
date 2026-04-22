@@ -28,7 +28,7 @@ class _SelectOBDState extends State<SelectOBD> {
               decoration: const InputDecoration(
                 labelText: "Enter PC IP Address",
                 border: OutlineInputBorder(),
-                hintText: "192.168.x.x",
+                hintText: "10.130.204.217",
               ),
               keyboardType: TextInputType.number,
             ),
