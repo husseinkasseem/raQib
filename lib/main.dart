@@ -63,6 +63,8 @@ class MyApp extends StatelessWidget {
             Connected.routeName: (context) => const Connected(),
             HomeScreen.routeName: (context) => const HomeScreen(),
           },
+          initialRoute: SelectOBD.routeName,
+
           locale: context.locale,
           supportedLocales: context.supportedLocales,
           localizationsDelegates: context.localizationDelegates,
