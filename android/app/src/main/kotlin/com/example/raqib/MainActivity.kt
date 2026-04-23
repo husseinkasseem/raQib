@@ -10,107 +10,157 @@ import io.flutter.plugin.common.EventChannel
 import java.io.InputStream
 import java.util.UUID
 
-class MainActivity : FlutterActivity() {
+class MainActivity: FlutterActivity() {
 
     private val METHOD_CHANNEL = "bluetooth_classic"
-    private val EVENT_CHANNEL = "obd_stream"
+    private val EVENT_CHANNEL = "bluetooth_stream"
 
     private var socket: BluetoothSocket? = null
+    private var inputStream: InputStream? = null
+    private var listeningThread: Thread? = null
+
+    private val DEFAULT_UUID: UUID =
+        UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        val adapter = BluetoothAdapter.getDefaultAdapter()
-
-        // ✅ MethodChannel
+        // =======================
+        // 🔵 MethodChannel
+        // =======================
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, METHOD_CHANNEL)
             .setMethodCallHandler { call, result ->
 
                 when (call.method) {
 
-                    // 🔍 الأجهزة المقترنة
                     "getPairedDevices" -> {
+                        val adapter = BluetoothAdapter.getDefaultAdapter()
 
                         if (adapter == null) {
-                            result.error("NO_BT", "Bluetooth not supported", null)
+                            result.error("NO_BLUETOOTH", "Bluetooth not supported", null)
                             return@setMethodCallHandler
                         }
 
-                        if (!adapter.isEnabled) {
-                            result.error("OFF", "Bluetooth is OFF", null)
-                            return@setMethodCallHandler
-                        }
+                        val devices = adapter.bondedDevices
+                        val list = mutableListOf<Map<String, String>>()
 
-                        val devices: Set<BluetoothDevice> = adapter.bondedDevices
-
-                        val list = devices.map {
-                            mapOf(
-                                "name" to (it.name ?: "Unknown"),
-                                "address" to it.address
+                        for (device in devices) {
+                            list.add(
+                                mapOf(
+                                    "name" to (device.name ?: "Unknown"),
+                                    "address" to device.address
+                                )
                             )
                         }
 
                         result.success(list)
                     }
 
-                    // 🔗 connect
                     "connect" -> {
                         val address = call.argument<String>("address")
 
+                        if (address == null) {
+                            result.error("INVALID_ADDRESS", "Address is null", null)
+                            return@setMethodCallHandler
+                        }
+
                         try {
-                            val device = adapter.getRemoteDevice(address)
+                            val adapter = BluetoothAdapter.getDefaultAdapter()
+                            val device: BluetoothDevice = adapter.getRemoteDevice(address)
 
-                            val uuid = UUID.fromString(
-                                "00001101-0000-1000-8000-00805F9B34FB"
-                            )
+                            socket = device.createRfcommSocketToServiceRecord(DEFAULT_UUID)
 
-                            socket = device.createRfcommSocketToServiceRecord(uuid)
                             adapter.cancelDiscovery()
-                            socket?.connect()
 
-                            result.success(true)
+                            socket?.connect()
+                            inputStream = socket?.inputStream
+
+                            result.success("connected")
 
                         } catch (e: Exception) {
-                            result.error("CONNECT_ERROR", e.message, null)
+                            closeConnection()
+                            result.error("CONNECTION_FAILED", e.message, null)
                         }
+                    }
+
+                    "disconnect" -> {
+                        closeConnection()
+                        result.success("disconnected")
                     }
 
                     else -> result.notImplemented()
                 }
             }
 
-        // ✅ EventChannel (قراءة الداتا)
+        // =======================
+        // 🟢 EventChannel
+        // =======================
         EventChannel(flutterEngine.dartExecutor.binaryMessenger, EVENT_CHANNEL)
             .setStreamHandler(object : EventChannel.StreamHandler {
 
                 override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
 
-                    val inputStream: InputStream? = socket?.inputStream
+                    val stream = inputStream
 
-                    if (inputStream == null) {
-                        events?.error("NO_CONNECTION", "Bluetooth not connected", null)
+                    if (stream == null) {
+                        events?.error("NO_STREAM", "Not connected", null)
                         return
                     }
 
-                    val thread = Thread {
+                    listeningThread = Thread {
+                        val buffer = ByteArray(1024)
+
                         try {
-                            val buffer = ByteArray(1024)
-
                             while (!Thread.currentThread().isInterrupted) {
-                                val bytes = inputStream.read(buffer)
-                                val data = String(buffer, 0, bytes)
 
-                                events?.success(data)
+                                val bytes = stream.read(buffer)
+
+                                // 🔥 لو الاتصال اتقفل
+                                if (bytes == -1) break
+
+                                if (bytes > 0) {
+                                    val data = String(buffer, 0, bytes)
+
+                                    // 🔥 لازم Main Thread
+                                    runOnUiThread {
+                                        events?.success(data)
+                                    }
+                                }
                             }
+
                         } catch (e: Exception) {
-                            events?.error("READ_ERROR", e.message, null)
+                            runOnUiThread {
+                                events?.error("READ_ERROR", e.message, null)
+                            }
                         }
                     }
 
-                    thread.start()
+                    listeningThread?.start()
                 }
 
-                override fun onCancel(arguments: Any?) {}
+                override fun onCancel(arguments: Any?) {
+                    listeningThread?.interrupt()
+                    listeningThread = null
+                }
             })
+    }
+
+    // =======================
+    // 🔴 Clean Close
+    // =======================
+    private fun closeConnection() {
+        try {
+            listeningThread?.interrupt()
+            listeningThread = null
+
+            inputStream?.close()
+            inputStream = null
+
+            socket?.close()
+            socket = null
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

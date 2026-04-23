@@ -12,15 +12,22 @@
 
     <!-- 🆕 Android 12+ -->
     <uses-permission
-        android:name="android.permission.BLUETOOTH_CONNECT" />
+        android:name="android.permission.BLUETOOTH_CONNECT"
+        tools:targetApi="31" />
 
     <uses-permission
         android:name="android.permission.BLUETOOTH_SCAN"
-        android:usesPermissionFlags="neverForLocation" />
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="31" />
 
-    <!-- 📍 Location -->
+    <!-- 📍 Location (مهم لبعض الأجهزة) -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- 🔥 مهم جدًا -->
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="true" />
 
     <application
         android:label="raqib"
